@@ -17,4 +17,11 @@ ENV LANG=en_US.utf8 \
 RUN sudo -u csc3050 env HTTP_PROXY="$HTTP_PROXY" HTTPS_PROXY="$HTTPS_PROXY"  pikaur -S --noconfirm --color=always code-server
 RUN pacman -Sc --noconfirm && chsh -s /usr/bin/fish csc3050
 
-CMD ["sudo", "-u", "csc3050", "code-server", "--bind-addr", "0.0.0.0:3050", "--auth", "none" ]
+EXPOSE 3050
+
+ENV PASSWORD=csc3050
+
+USER csc3050
+
+CMD ["code-server", "--bind-addr", "0.0.0.0:3050", "--auth", "password"]
+
