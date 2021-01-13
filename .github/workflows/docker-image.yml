@@ -13,6 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag csc3050:$(date +%s)
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Build, Tag, Push
+      uses: mattdavis0351/actions/docker-gpr@1.3.1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        image-name: csc3150
+        dockerfile-location: ./
