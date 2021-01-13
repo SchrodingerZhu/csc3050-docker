@@ -1,6 +1,5 @@
 FROM archlinux
-RUN echo 'Server = https://mirrors.cloud.tencent.com/archlinux/$repo/os/$arch' | tee /etc/pacman.d/mirrorlist  && \
-    printf '\n[archlinuxcn]\nServer = https://mirrors.cloud.tencent.com/archlinuxcn/$arch\n' | tee -a /etc/pacman.conf
+RUN printf '\n[archlinuxcn]\nServer = https://repo.archlinuxcn.org/$arch\n' | tee -a /etc/pacman.conf
 RUN pacman-key --init && pacman-key --populate && pacman -Syyu --noconfirm archlinuxcn-keyring 
 RUN pacman -S --noconfirm pikaur base-devel cmake ninja clang gdb lldb iverilog fish python nano vim emacs-nox && pacman -Sc --noconfirm
 
